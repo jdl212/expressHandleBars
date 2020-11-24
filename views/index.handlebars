@@ -1,0 +1,51 @@
+<!-- this is the index page which extends the main.handlebar pages -->
+<div class="container">
+  <div class="row">
+    <!-- Show the image and Title in 1 row -->
+    <div class="col-12 text-center">
+      <img src="/assets/image/hamburger.png" class="img" width="125px" height="125px">
+      <h1>Eat-Da-Burger! </h1>
+    </div>
+  <!-- Show in half the screen the list of available burgers-->
+  <div class="col-md-6 text-center">
+        {{#each burger_data}}<!-- for each burger in DB-->
+          {{#unless this.devoured}} <!-- for Each burger which has devoured false -->
+  <!-- Show Data / table-->
+      <div class="row">
+        <div class="col-8 md-1 ">
+          <button class="btn btn-info btn-lg btn-block form-control m-2"> {{this.id}} .  <i class="fas fa-hamburger"></i>   {{this.burger_name}}</i></button>
+        </div>
+          <!-- On click of a button update the burger details in DB-->
+        <div class="col-4 text-center md-1">
+          <form method="POST" action="/burgers/update?_method=PUT">
+            <input type="hidden" name="burger_id" type="text" value={{this.id}}>
+            <button type="submit" class="btn btn-success btn-block m-2">Devour it!</button>
+          </form>
+        </div>
+      </div>
+        {{/unless}} <!-- end if -->
+      {{/each}} <!-- end loop -->
+    </div>
+<!-- another half of the c=screen with burger data which is consumed-->
+    <div class="col-md-5  md-1 overflow-auto" style="max-height: 250px;">
+      {{#each burger_data}} <!-- loop again with burger data -->
+        {{#if this.devoured}} <!-- for the data which is has  devoured true  show the burger-->
+          <button class="btn btn-dark btn-block btn-lg form-control">
+            {{this.id}}. {{this.burger_name}}
+            </button>
+              {{/if}}<!-- end IF-->
+            {{/each}}<!-- end for lloop-->
+    </div>
+  </div>
+    <!--Add data to the database  -->
+  <div class="row m-5">
+    <div class="col-12 text-center">
+        <form action="/burgers/create" method="POST">
+          <input type="text" name="burger_name" class="form-control"
+          value="" id="enter_text">
+          <button type="submit" class="btn btn-warning" id="text-enter-button">SUBMIT</button>
+        </form>
+        <h4 class="text-center">Enter in a burger you would like to eat!</h4>
+    </div>
+  </div>
+  </div>

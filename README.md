@@ -1,5 +1,3 @@
-# expressHandleBars
-
 # EXPRESS HANDLEBARS BURGERS
 
 ## Eat-Da-Burger!
